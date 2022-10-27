@@ -1,0 +1,20 @@
+[
+    {
+        "nombre": "T25", "peso": 108, "categoria": "trifasico"
+    },
+    {
+        "nombre": "T63", "peso": 155, "categoria": "trifasico"
+    },
+    {
+        "nombre": "T40", "peso": 123, "categoria": "trifasico"
+    },
+    {
+        "nombre": "T100", "peso": 225, "categoria": "trifasico"
+    },
+    {
+        "nombre": "T160", "peso": 256, "categoria": "trifasico"
+    },
+    {
+        "nombre": "T10", "peso": 53, "categoria": "trifasico"
+    }
+]
