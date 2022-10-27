@@ -12,13 +12,16 @@ class Nucleos{
     }
 }
 
-nucleos.push(new Nucleos(1, "T10", 53, "trifasico"));
-nucleos.push(new Nucleos(2, "T16", 58, "trifasico"));
-nucleos.push(new Nucleos(3, "T25", 108, "trifasico"));
-nucleos.push(new Nucleos(4, "T40", 123, "trifasico"));
-nucleos.push(new Nucleos(5, "T63", 155, "trifasico"));
+nucleos.push(new Nucleos(1, "T10", 56, "trifasico"));
+nucleos.push(new Nucleos(2, "T16", 63, "trifasico"));
+nucleos.push(new Nucleos(3, "T25", 114, "trifasico"));
+nucleos.push(new Nucleos(4, "T40", 115, "trifasico"));
+nucleos.push(new Nucleos(5, "T63", 158, "trifasico"));
 nucleos.push(new Nucleos(6, "T100", 225, "trifasico"));
 nucleos.push(new Nucleos(7, "T160", 256, "trifasico"));
+nucleos.push(new Nucleos(8, "M5", 25, "monofasico"));
+nucleos.push(new Nucleos(9, "M10", 40, "monofasico"));
+nucleos.push(new Nucleos(10, "M25", 68.5, "monofasico"));
 
 
 function agregarProductos(productoId){
