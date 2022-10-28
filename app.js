@@ -1,6 +1,8 @@
 const catalogo = document.querySelector(".catalogo");
 let nucleos = [];
 const carritoNucleos = JSON.parse(localStorage.getItem('carritoNucleos')) || [];
+let personas = [];
+const personasLS = JSON.parse(localStorage.getItem('personas')) || [];
 
 class Nucleos{
     constructor(id, nombre, peso, categoria){
@@ -11,6 +13,23 @@ class Nucleos{
         this.cantidad = 0;
     }
 }
+
+class Persona{
+    constructor(id, nombre, porcentaje){
+        this.id = id;
+        this.nombre = nombre;
+        this.faltas = 0;
+        this.porcentaje = porcentaje;
+    }
+}
+
+personas.push(new Persona(1, "Aldo", (23/100)))
+personas.push(new Persona(2, "Hernan", (27/100)))
+personas.push(new Persona(3, "Dylan", (27/100)))
+personas.push(new Persona(4, "Franco", (23/100)))
+
+const aJSON = JSON.stringify(personas);
+localStorage.setItem('personas', aJSON)
 
 nucleos.push(new Nucleos(1, "T10", 56, "trifasico"));
 nucleos.push(new Nucleos(2, "T16", 63, "trifasico"));
@@ -52,7 +71,7 @@ function pintarEnElDom(){
         elemento.classList.toggle("card__container")
         elemento.innerHTML=`
         <h1 class="producto-nombre">${producto.nombre}</h1>
-        <p class="producto-peso">Peso: ${producto.peso}</p>
+        <p class="producto-peso">Peso: ${producto.peso}kg</p>
         <button class="btn-agregar" id="btn${producto.id}">Agregar</button>`
 
         catalogo.appendChild(elemento);
@@ -62,7 +81,7 @@ function pintarEnElDom(){
             agregarProductos(producto.id);
             Toastify({
                 text: `${producto.nombre} añadido al resumen`,
-                duration: 2000,
+                duration: 1000,
                 style: {
                     background: '#72e7c0'
                 }

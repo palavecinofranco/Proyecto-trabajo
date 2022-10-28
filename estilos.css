@@ -98,3 +98,7 @@
 .btn-agregar:hover{
     background-color: #EEE;
 }
+
+.producto-nombre{
+    font-size: 30px;
+}

@@ -4,6 +4,7 @@ const tabla = document.querySelector(".div__table")
 const sectionMain = document.querySelector(".main__section")
 const contenedorResumen = document.querySelector(".div__resumen")
 let precioDolar;
+let personas = JSON.parse(localStorage.getItem('personas')) || [];
 
 function mostrarNucleos (){
 carritoNucleos.forEach(producto => {
@@ -86,7 +87,6 @@ function actualizarLS (){
 function sumarCantidadProducto(productoId){
     const producto = carritoNucleos.find((prod) => prod.id === productoId)
     producto.cantidad++
-    console.log(producto.cantidad)
 }
 
 function restarCantidadProducto(productoId){
@@ -103,15 +103,24 @@ botonResumen.addEventListener("click", ()=>{
     .then((resp)=>resp.json())
     .then((data)=>{
         precioDolar = data[0].casa.venta
+        console.log(parseFloat(precioDolar))
+        pesoTotal = carritoNucleos.reduce((acc, producto) => acc + producto.peso * producto.cantidad, 0);
         contenedorResumen.innerHTML = `
         <p>Total de kg = ${carritoNucleos.reduce((acc, producto) => acc + producto.peso * producto.cantidad, 0)}kg</p>
         <p>Total en dolar = $${parseInt((carritoNucleos.reduce((acc, producto) => acc + producto.peso * producto.cantidad, 0))*0.80)}</p>
-        <p>Total en pesos = $${parseInt(parseInt(precioDolar) * (carritoNucleos.reduce((acc, producto) => acc + producto.peso * producto.cantidad, 0)))}</p>
-        <p>Dylan: $${parseInt((parseInt(precioDolar) * (carritoNucleos.reduce((acc, producto) => acc + producto.peso * producto.cantidad, 0)))*(27/100))}<br>
-        Hernan: $${parseInt((parseInt(precioDolar) * (carritoNucleos.reduce((acc, producto) => acc + producto.peso * producto.cantidad, 0)))*(27/100))}<br>
-        Franco: $${parseInt((parseInt(precioDolar) * (carritoNucleos.reduce((acc, producto) => acc + producto.peso * producto.cantidad, 0)))*(23/100))}<br>
-        Aldo: $${parseInt((parseInt(precioDolar) * (carritoNucleos.reduce((acc, producto) => acc + producto.peso * producto.cantidad, 0)))*(23/100))}</p>
-        `
+        <p>Total en pesos = $${(carritoNucleos.reduce((acc, producto) => acc + producto.peso * producto.cantidad, 0)*0.80) * parseInt(precioDolar)}</p>`
+        personas.forEach((persona)=>{
+            const elemento = document.createElement("p")
+            if(persona.faltas>0){
+                elemento.innerHTML =`
+                ${persona.nombre}: $${parseInt((parseInt(precioDolar) * (carritoNucleos.reduce((acc, producto) => acc + producto.peso * producto.cantidad, 0)*0.80)) * persona.porcentaje)} (Menos -${persona.faltas * 3000}) Total: ${parseInt(((parseInt(precioDolar) * (carritoNucleos.reduce((acc, producto) => acc + producto.peso * producto.cantidad, 0)*0.80)) * persona.porcentaje) - persona.faltas * 3000)}`
+            }else{
+                elemento.innerHTML =`
+                ${persona.nombre}: $${parseInt((parseInt(precioDolar) * (carritoNucleos.reduce((acc, producto) => acc + producto.peso * producto.cantidad, 0)*0.80)) * persona.porcentaje)}`
+            }
+
+            contenedorResumen.appendChild(elemento);
+        })
     })
 })
 
